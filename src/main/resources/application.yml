@@ -1,0 +1,57 @@
+db:
+  username: postgres
+  password: pass
+  driver: PostgresDriver
+  url: postgres:5432
+  hosts: localhost,127.0.0.1
+  properties:
+    first: 123
+    second: 567
+    third.value: Third
+  pool:
+    size: 12
+    timeout: 10
+  pools:
+    - size: 1
+      timeout: 1
+    - size: 2
+      timeout: 2
+    - size: 3
+      timeout: 3
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    format:
+      date: iso
+  datasource:
+    url: jdbc:postgresql://localhost:5433/postgres
+    username: postgres
+    password: pass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties.hibernate:
+      show_sql: true
+      format_sql: true
+      hbm2ddl.auto: validate
+    open-in-view: false
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 886982415727-8u1prc6jf86nftd2v9fr5fq5113pbj8f.apps.googleusercontent.com
+            client-secret: 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
+            redirectUri: http://localhost:8080/login/oauth2/code/google
+            scope: openid,email,profile
+  messages:
+   basename: messages
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: 886982415727-8u1prc6jf86nftd2v9fr5fq5113pbj8f.apps.googleusercontent.com
+      client-secret: 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
+      scopes: openid,email,profile
+    oauth2-redirect-url: http://localhost:8080/swagger-ui/oauth2-redirect.html
