@@ -1,67 +1,20 @@
-package com.dmdev.spring.aop;
+package com.dmdev.logging.aop;
 
-import com.dmdev.spring.bpp.Transaction;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Aspect
-@Component
-@Order(1)
 public class FirstAspect {
-
-
-    /*
-       this - check AOP proxy class type
-       target - check target object class type
-     */
-    @Pointcut("this(org.springframework.data.repository.Repository)")
-//    @Pointcut("target(org.springframework.data.repository.Repository)")
-    public void isRepositoryLayer() {
-    }
-
-    /*
-      @annotation - check annotation on method level
-     */
-    @Pointcut("com.dmdev.spring.aop.CommonPointcuts.isControllerLayer() && @annotation(org.springframework.web.bind.annotation.GetMapping)")
-    public void hasGetMapping() {
-    }
-
-    /*
-       args- check method param type
-       * - any param type
-       .. - 0+ any params type
-    */
-    @Pointcut("com.dmdev.spring.aop.CommonPointcuts.isControllerLayer()) && args(org.springframework.ui.Model,..)")
-    public void hasModelParam() {
-    }
-
-    /*
-       @args- check annotation on the param type
-       * - any param type
-       .. - 0+ any params type
-     */
-    @Pointcut("com.dmdev.spring.aop.CommonPointcuts.isControllerLayer() && @args(com.dmdev.spring.validation.UserInfo,..)")
-    public void hasUserInfoParamAnnotation() {
-    }
-
-    /*
-        bean - check bean name
-     */
-    @Pointcut("bean(*Service)")
-    public void isServiceLayerBean() {
-    }
 
     /*
         execution(modifiers? return_type package.class.method(params) throws?)
      */
-    @Pointcut("execution(public * com.dmdev.spring.service.*Service.findById(*))")
+    @Pointcut("execution(public * com.dmdev.*.service.*Service.findById(*))")
     public void anyFindByIdServiceMethod() {
     }
 
